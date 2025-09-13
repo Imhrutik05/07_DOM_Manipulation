@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+        #dom {
+            padding: 50px;
+        }
+        .buttons {
+            margin-top: 30px;
+        }
+        button:hover {
+            cursor: pointer;
+        }
+        button {
+            width: 120px;
+            height: 30px;
+        }
+        button#clear {
+            color: white;
+            background-color: black;
+            border: 1px solid white;
+        }
+        hr {
+            width: 100px;
+            margin-left: 0px;
+        }
+        #error {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body style="background-color: black; color: white;">
+    <div id="dom">
+        <h1 id="heading">Counter Using HTML</h1>
+        <p id="counter">Your current count is: <span id="count">1</span></p>
+        <hr>
+        <p id="error">Error: Counter cannot be less than 0</p>
+        <div class="buttons">
+            <button id="increment">Increment</button>
+            <button id="decrement">Decrement</button>
+            <button id="clear">Clear</button>
+        </div>
+
+    </div>
+</body>
+<script>
+    let counterValue = 1;
+    let counterText = document.getElementById("count");
+    let clearB = document.getElementById("clear");
+    let incrementB = document.getElementById("increment");
+    let decrementB = document.getElementById("decrement");
+    let errorText = document.getElementById("error");
+
+    function updateC(){
+        counterText.textContent = counterValue;
+        
+        if (counterValue > 0) {
+            errorText.style.display = "none";
+            clearB.style.display = "inline";
+            decrementB.disabled = false;
+        }
+        else if (counterValue === 0){
+            decrementB.disabled = true;
+            clearB.style.display = "none";
+            errorText.style.display = "inline";
+        }
+        
+    }
+    function increment(){
+        
+        counterValue++;
+        updateC();
+        console.log("increment is clicked " + counterValue)
+        
+    }
+    function decrement(){
+        counterValue--;
+        updateC();
+        console.log("decrement is clicked " + counterValue)
+        
+    }
+    function clearC(){
+        
+        counterValue = 0;
+        updateC();
+        console.log("clear is clicked " + counterValue)
+        
+    }
+
+    // add event listeners
+    incrementB.addEventListener('click', increment);
+    decrementB.addEventListener('click', decrement);
+    clearB.addEventListener('click', clearC);
+    
+</script>
+</html>
